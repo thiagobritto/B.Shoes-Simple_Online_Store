@@ -1,0 +1,22 @@
+{
+    "name": "thiagobritto/b.shoes",
+    "description": "Descrição do app ou site em php",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thiago Brito",
+            "email": "thiagobritto.developer@gmail.com"
+        }
+    ],
+    "require": {
+        "twig/twig": "3.*",
+        "slim/slim": "2.*"
+    },
+    "autoload": {
+    	"psr-4": {
+            "Lib\\": "Lib/",
+    		"App\\": "App/"
+    	}
+    }
+}
