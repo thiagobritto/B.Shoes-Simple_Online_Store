@@ -1,12 +1,16 @@
-<?php
+<?php 
 
-use Slim\Slim;
+/* Use */
+use \Slim\App;
+use \Src\AppClass\SlimConfig;
 
-require_once __DIR__ . '/../App/Controller/config.php';
+/* PSR-4 autoload */
+require_once '../src/config.php';
 
-$app = new Slim;
+/* Init Slim 3 */
+$app = new App( SlimConfig::slimConfig() );
 
-require_once ROOT . '/App/Routes/main.php';
+require_once ROOT . '/routes/routes.php';
 
+/* End Slim 3 */
 $app->run();
-

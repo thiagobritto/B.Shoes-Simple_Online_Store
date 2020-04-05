@@ -1,1 +1,1 @@
-# B.Shoes-Simple_Online_Store
+# B.Shoes - Simple Online Store

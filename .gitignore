@@ -1,3 +1,11 @@
 
 # Anotações
+
 *.txt
+
+packages/
+
+*.lock
+
+config.php
+

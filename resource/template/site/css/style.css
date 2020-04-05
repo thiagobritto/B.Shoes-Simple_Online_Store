@@ -1,0 +1,334 @@
+@charset "UTF-8";
+
+@import url ("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
+
+/* Reset */
+*{
+	margin: 0;
+	padding: 0;
+	border: none;
+	box-shadow: none;
+	outline: none;
+	text-decoration: none;
+	list-style: none;
+	box-sizing: border-box;
+}
+
+body{
+	font-family: 'Noto Sans', sans-serif;
+	background: #fff;
+	font-size: 14px;
+	font-weight: 400;
+	-webkit-font-smoothing: antialiased;
+}
+
+input, button, textarea{
+	font-family: 'Noto Sans', sans-serif;
+	font-size: 18px;
+	font-weight: 400;
+}
+
+button{
+	cursor: pointer;
+}
+
+a{
+	text-decoration: none;
+	color: #333;
+}
+
+/* var CSS3 */
+:root{
+	--colorHeader: #191970;
+}
+
+/* grid */
+.container{
+	display: block;
+	width: 100%;
+	max-width: 1200px;
+	margin-right: auto;
+	margin-left: auto;
+}
+.container-fluid{
+	width: 100%;
+}
+
+.flex-around{
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.flex-around-start{
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	justify-content: space-around;
+}
+
+.flex-between{
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+}
+.flex-between-start{
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	justify-content: space-between;
+}
+
+.flex-center{
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+}
+
+/* My Setting */
+#cabecalho{
+	background: var(--colorHeader);
+}
+
+#cabecalho nav a{
+	display: block;
+	color: #fff;
+	padding: 10px;
+}
+#section-form-logo{
+	background: #F1FFE7;
+}
+
+.sub-header-top a,
+.sub-header-top div,
+.sub-header-top form{
+	width: 33.3333%;
+	text-align: center;
+}
+
+.sub-header-top form{
+	padding: 15px;
+}
+
+.sub-header-top form input{
+	padding: 8px;
+	width: 170px;
+	border-radius: 8px 0px 0px 8px;
+	border-left: 1px solid rgba(0,0,0,.2);
+	border-top: 1px solid rgba(0,0,0,.2);
+	border-bottom: 1px solid rgba(0,0,0,.2);
+	transition: width .3s ease-in;
+}
+
+.sub-header-top form input:focus{
+	width: 220px;
+}
+
+.sub-header-top form button{
+	padding: 8px;
+	border-radius: 0px 8px 8px 0px;
+	border-right: 1px solid rgba(0,0,0,.2);
+	border-top: 1px solid rgba(0,0,0,.2);
+	border-bottom: 1px solid rgba(0,0,0,.2);
+	background: #fff;	
+}
+
+.logo{
+	font-size: 36pt;
+	color: #6290C3;
+}
+
+.section-media{
+	text-align: center;
+}
+
+.section-media a{
+	display: inline-block;
+	color: #333;
+	font-weight: bold;
+	padding: 10px;
+	transition: transform .3s ease-in;
+}
+
+.section-media a:hover{
+	transform: scale(1.3);
+}
+
+.section-frete-pagamento{
+	text-align: center;
+	background: #C2E7DA;
+	padding: 10px;
+	margin-top: -4px;
+}
+
+.section-frete-pagamento div{
+		width: 33.3333%;
+}
+
+.section-frete-pagamento div img{
+	width: 50px;
+}
+
+.section-frete-pagamento div:nth-child(1) img{
+	width: 150px;
+}
+
+#banners-min img{
+	width: 33.3333%;
+	padding: 20px 10px 10px 10px;
+}
+
+#destaque h2{
+	padding: 10px;
+	padding-top: 30px;
+}
+
+#destaque div div{
+	width: 25%;
+	padding: 10px 10px;
+	text-align: center;
+}
+#destaque div div h3{
+	font-size: 22px;
+}
+#destaque div div h3,
+#destaque div div p{
+	text-align: left;
+}
+
+#destaque div div img{
+	width: 100%;
+	padding-bottom: 20px;
+}
+.decribe{
+	margin-bottom: 20px;
+}
+
+.price{
+	font-size: 18px;
+	font-weight: bold;
+	color: #000;
+}
+
+.price-del{
+	color: #888888;
+	text-decoration: line-through;
+}
+
+#destaque div div a{
+	display: inline-table;
+	padding: 10px;
+	margin: 30px 10px 20px 10px;
+	background: var(--colorHeader);
+	color: #fff;
+	font-weight: bold;
+	border-radius: 3px;
+	box-shadow: 1px 1px 6px 1px #333;
+}
+#destaque div div a.cart{
+	background: #6290C3;
+}
+
+.banner-destaque{
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+
+.rodape{
+	background: #C2E7DA;
+	margin-top: 30px;
+	padding: 15px 0px;	
+}
+.redes{
+	margin-bottom: 30px;
+}
+
+.redes img{
+	margin: 0 2px;
+}
+
+.redes p{
+	display: block;
+	width: 100%;
+	text-align: center;
+}
+.form-rodape{
+	padding: 15px;
+}
+
+.form-rodape input{
+	padding: 5px 8px;
+	border: 2px solid rgba(0,0,0,.2);
+	border-radius: 10px;
+}
+
+.form-rodape button{
+	display: inline-table;
+	padding: 5px 12px;
+	margin-left: 20px;
+	color: #fff;
+	background: #6290C3;
+	border-radius: 3px;
+	box-shadow: 1px 1px 2px rgba(0,0,0,.3);
+}
+
+.copy{
+	text-align: center;
+}
+footer.rodape div.container{
+	padding: 10px 10px 0px 10px;
+}
+
+div.list-footer div{
+	margin: 20px 0px 10px 0px;
+}
+
+div.list-footer h5{
+	margin: 0px 0px 15px 0px;
+}
+
+img.img-fim-rodape{
+	width: 100%;
+}
+
+@media screen and (max-width: 768px){
+	.sub-header-top a,
+	.sub-header-top div,
+	.sub-header-top form{
+		width: 100%;
+		margin-bottom: 10px;
+	}
+	
+	.section-frete-pagamento div{
+		width: 33.3333%;
+	}
+	
+	#banners-min img{
+		width: 100%;
+	}
+
+	#destaque div div{
+		width: 100%;
+		margin-bottom: 20px;
+	}
+
+	.banner-destaque{
+		padding: 0 10px
+	}
+
+}
+
+@media screen and (max-width: 450px){
+	.form-rodape button{
+		margin: 30px;
+	}
+}
+
+@media screen and (max-width: 380px){
+	.section-frete-pagamento div{
+		width: 100%;
+	}
+}

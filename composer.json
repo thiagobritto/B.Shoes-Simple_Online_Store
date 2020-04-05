@@ -10,13 +10,17 @@
         }
     ],
     "require": {
-        "twig/twig": "3.*",
-        "slim/slim": "2.*"
+        "php": "7.*",
+        "slim/slim": "3.*",
+        "twig/twig": "3.*"
+    },
+    "config": {
+        "vendor-dir": "packages/"
     },
     "autoload": {
-    	"psr-4": {
-            "Lib\\": "Lib/",
-    		"App\\": "App/"
-    	}
+        "psr-4": {
+            "App\\": "app/",
+            "Src\\": "src/"
+        }
     }
 }
