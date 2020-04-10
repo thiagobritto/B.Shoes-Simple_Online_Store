@@ -14,24 +14,7 @@ namespace Src\DataBase;
 
 abstract class MethodModify
 {
-	/**
-	* Guarda dados de yabelas do 
-	* banco de forma privada
-	* 
-	* @access private
-	* @var array $params
-	*/
-
 	private $params=[];
-
-	/**
-	* Função especial do PHP 
-	* 
-	* @access public
-	* @param string $name
-	* @param array $params
-	* @return mixed
-	*/
 
 	public function __call( string $name, array $params )
 	{
@@ -49,45 +32,25 @@ abstract class MethodModify
 				return [];
 				break;
 		}
+	} 
 
-	} // end __call()
-
-	/**
-	* A Função recebe dados em foma de aray para 
-	* serem tratados pela function __call()  
-	* 
-	* @access protected
-	* @param array $params
-	* @return void
-	*/
-
-	protected function setData( array $params )
+	protected function setData( array $dataQuery )
 	{
-		foreach ( $params as $key => $value )
+		foreach ( $dataQuery as $colum => $value )
 		{
-			$this->{ "set" . $key }( $value );
+			$this->{ "set" . $colum }( $value );
 		}
+	} 
 
-	} // end setData()
-
-	/**
-	* A Função retorna os dados 
-	* já encapsulados pela classe  
-	* 
-	* @access public
-	* @param int $opt
-	* @return array/object
-	*/
-
-	public function getAll( int $opt=\PDO::FETCH_ASSOC )
+	public function getData( int $opt=\PDO::FETCH_ASSOC )
 	{
 		if( $opt === \PDO::FETCH_OBJ )
 		{
 			return ( object ) $this->params;
-		} elseif ( $opt === \PDO::FETCH_ASSOC ) {
+		} 
+		elseif ( $opt === \PDO::FETCH_ASSOC ) 
+		{
 			return ( array ) $this->params;
 		}
-		
-	} // end getAll()
-
-} // end class MethodModify
+	} 
+} 

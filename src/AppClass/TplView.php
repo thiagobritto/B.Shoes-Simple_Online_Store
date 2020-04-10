@@ -23,6 +23,7 @@ class TplView
 	private function setView( string $file, array $param=[])
 	{
 		$loader = new FilesystemLoader( ROOT . DS . $this->path['path'] );
+		
 		$twig = new Environment( $loader, [
 			//"cache" => ROOT.DS."resource/cache",
 		]);
@@ -34,20 +35,20 @@ class TplView
 		return str_replace( "__SITE__", SITE, $content ); 
 	}
 
-	//echo str_replace('#site#', SITE, $content);
 	public function draw( string $file, array $param=[] )
 	{
 		$this->page[] = $this->setView( $file, $param ); 
 	
-		if ($this->path["header"])
+		if ( $this->path["header"] )
 		{
 			array_unshift( $this->page, $this->setView( 'header', $param ) );
 		}
-		if ( $this->path["footer"] ){	
+		
+		if ( $this->path["footer"] )
+		{	
 			array_push( $this->page, $this->setView( 'footer', $param ) );
 		}
 
 		return $this->page;
 	}
-	
 }

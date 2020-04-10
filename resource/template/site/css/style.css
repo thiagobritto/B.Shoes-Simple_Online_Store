@@ -74,6 +74,7 @@ a{
 	align-items: center;
 	justify-content: space-between;
 }
+
 .flex-between-start{
 	display: flex;
 	flex-wrap: wrap;
@@ -97,7 +98,13 @@ a{
 	display: block;
 	color: #fff;
 	padding: 10px;
+	transition: filter .3s ease-in;
 }
+
+#cabecalho nav a:hover{
+	filter: brightness(80%);
+}
+
 #section-form-logo{
 	background: #F1FFE7;
 }
@@ -218,6 +225,7 @@ a{
 	text-decoration: line-through;
 }
 
+.btn-comprar,
 #destaque div div a{
 	display: inline-table;
 	padding: 10px;
@@ -228,6 +236,8 @@ a{
 	border-radius: 3px;
 	box-shadow: 1px 1px 6px 1px #333;
 }
+
+a.cart,
 #destaque div div a.cart{
 	background: #6290C3;
 }
@@ -242,6 +252,7 @@ a{
 	margin-top: 30px;
 	padding: 15px 0px;	
 }
+
 .redes{
 	margin-bottom: 30px;
 }
@@ -255,6 +266,7 @@ a{
 	width: 100%;
 	text-align: center;
 }
+
 .form-rodape{
 	padding: 15px;
 }
@@ -278,6 +290,7 @@ a{
 .copy{
 	text-align: center;
 }
+
 footer.rodape div.container{
 	padding: 10px 10px 0px 10px;
 }

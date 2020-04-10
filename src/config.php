@@ -26,17 +26,17 @@ define( 'ROOT', $_SERVER['DOCUMENT_ROOT'] );
 define( 'SITE', $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'] );
 
 /* Functions para tratamento de errors 
-function error_handler( $code, $message, $file, $line )
-{
-	echo json_encode([
-		"code" => $code,
-		"message" => $message,
-		"line" => $line,
-		"file" => $file
-	]);
-}
-set_error_handler( "error_handler" );
-error_reporting( E_ALL & ~E_NOTICE );
+	function error_handler( $code, $message, $file, $line )
+	{
+		echo json_encode([
+			"code" => $code,
+			"message" => $message,
+			"line" => $line,
+			"file" => $file
+		]);
+	}
+	set_error_handler( "error_handler" );
+	error_reporting( E_ALL & ~E_NOTICE );
 */
 
 /* Autoload psr-4 composer */

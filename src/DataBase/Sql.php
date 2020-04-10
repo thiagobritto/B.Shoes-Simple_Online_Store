@@ -2,168 +2,74 @@
 
 namespace Src\DataBase;
 
+use \Src\Interfaces\SqlInterface;
+
 /**
 * Class para consulta ao banco de dados
 * 
 * @author Thiago Britto
 * @copyright MIT 2020, Thiago Britto
-* @version 1.0
+* @version 1.2
 * @package \Src\DataBase\Sql;
 */
 
-use \Src\Interfaces\SqlInterface;
-
 class Sql extends MethodModify implements SqlInterface
 {
-	/**
-	* $conn guarda a Conexão Singleton 
-	* @access private
-	* @var $conn
-	*/
-
 	private $conn;
-
-	/**
-	* construtor da class pega a conexão 
-	* e seta na propriedade $conn 
-	* 
-	* @access public
-	* @return void
-	*/
+	private $stmt;
+	private $fetch = 'fetch';
 
 	public function __construct()
 	{
 		$this->conn = Connect::conn();
-	} // end __construct()
+	}
 
-	/**
-	* Procedimento para buacar registro 
-	* no banco da dados 
-	* 
-	* @access public
-	* @param string $name 
-	* @param array $params
-	* @return void
-	*/
-
-	public function select( string $query, array $params=[] )
+	private function setQuery( string $querySql )
 	{
-		try {
-			$stmt = $this->conn->prepare( $query );
-			$stmt->execute( $params );
-			$this->setData( $stmt->fetch( \PDO::FETCH_ASSOC ) );		
-		} catch (\PDOException  $e) {
-			echo json_encode([
-				"message" => $e->getMessage(),
-				"line" => $e->getLine(),
-				"file" => $e->getFile(),
-				"code" => $e->getCode()
-			]);
-		}
-	} // end select()
+		$this->stmt = $this->conn->prepare( $querySql );
+	}
 
-	/**
-	* Procedimento para buacar registros 
-	* no banco da dados 
-	* 
-	* @access public
-	* @param string $name
-	* @param array $params
-	* @return void
-	*/
-
-	public function selectAll( string $query, array $params=[] )
+	private function setDataKeyValue( array $dataKeyValue )
 	{
-		try {
-			$stmt = $this->conn->prepare( $query );
-			$stmt->execute( $params );
-			$this->setData( $stmt->fetchAll( \PDO::FETCH_ASSOC ) );
-		} catch (\Exception  $e) {
-			echo json_encode([
-				"message" => $e->getMessage(),
-				"line" => $e->getLine(),
-				"file" => $e->getFile(),
-				"code" => $e->getCode()
-			]);
-		}
-	} // end selectAll()
-
-	/**
-	* Função insert, update, delete 
-	* registros no banco da dados 
-	* 
-	* @access public
-	* @param string $name
-	* @param array $params
-	* @return boolean
-	*/
-
-	public function query( string $query, array $params )
-	{
-		try {
-			$this->queryVerify( $query );
-			$stmt = $this->conn->prepare( $query );
-			$response = $this->setParams( $stmt, $params );
-			if( !$response ){
-				throw new \Exception("Error ao tentar executar $query !");
-				return false;
-				exit;
-			}
-			return true;
-		} catch (\Exception  $e) {
-			echo json_encode([
-				"message" => $e->getMessage(),
-				"line" => $e->getLine(),
-				"file" => $e->getFile(),
-				"code" => $e->getCode()
-			]);
-		}
-	} // end insert()
-
-	/**
-	* Função agrega funcionalidades 
-	* a Sql::query()
-	* 
-	* @access private
-	* @param string $query
-	* @param array $params
-	* @return boolean
-	*/
-
-	private function setParams( object $stmt, array $params )
-	{
-		if( $params && !empty($params) && isset($params) )
+		foreach ( $dataKeyValue as $key => $value ) 
 		{
-			foreach ( $params as $key => $value ) 
-			{
-				$stmt->bindValue( $key, $value, \PDO::PARAM_STR );
-			}
-			return $stmt->execute();
-		} else {
-			return false;
+			$this->stmt->bindValue( $key, $value );
 		}
-	} // end setParams()
+	}
 
-	/**
-	* Função agrega funcionalidades 
-	* a Sql::query()
-	* 
-	* @access private
-	* @param string $query
-	* @return boolean
-	*/
-
-	private function queryVerify( string $query )
+	private function verifyQuerySql( string $querySql )
 	{
-		if( strripos( $query, 'PDATE' ) || strripos( $query, 'ELETE' ) )
+		if ( !preg_match( '/WHERE/i',  $querySql ) )
 		{
-			if( !strripos( $query, 'WHERE' ) )
+			if ( !preg_match( '/INTO/i',  $querySql ) )
 			{
-				throw new \Exception("Error em: '{$query}', sentimos a falta de um 'WHERE'");
+				throw new \Exception("Error statement not found, WHERE or INTO");
 				return false;
 				exit;
 			}
 		}
-	} // end qheryVerify()
+	}
 
-} // end class Sql
+	public function select( string $querySql, array $dataKeyValue=[] )
+	{
+		$this->setQuery( $querySql );
+		$this->setDataKeyValue( $dataKeyValue );
+		$this->stmt->execute();
+		$this->setData( $this->stmt->{$this->fetch}( \PDO::FETCH_ASSOC ) );
+	}
+
+	public function selectAll( string $querySql, array $dataKeyValue=[] )
+	{
+		$this->fetch = "fetchAll";
+		$this->select( $querySql, $dataKeyValue );
+	}
+
+	public function query( string $querySql, array $dataKeyValue )
+	{
+		$this->verifyQuerySql( $querySql );
+		$this->setQuery( $querySql );
+		$this->setDataKeyValue( $dataKeyValue );
+		$this->stmt->execute();
+		return $this->stmt->rowCount();
+	}
+}
